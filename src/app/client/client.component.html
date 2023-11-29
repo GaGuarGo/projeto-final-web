@@ -55,7 +55,7 @@
                     <input class="form-control" type="text" id="cep" formControlName="cep" name="cep" mask="000000-000">
                     <div *ngIf="submited">
                         <small *ngIf="cep.hasError('required')" class="text-danger">O CEP é Obrigatório</small>
-                        <small *ngIf="cep.hasError('minlength')" class="text-danger">Digite um CEP Válido:
+                        <small *ngIf="cep.hasError('maxlength')" class="text-danger">Digite um CEP Válido:
                             12376512</small>
                     </div>
                 </div>
@@ -66,8 +66,8 @@
                     <label for="endereco">Estado:</label>
                     <input class="form-control" type="text" id="state" formControlName="state" name="state">
                     <div *ngIf="submited">
-                        <small *ngIf="cep.hasError('required')" class="text-danger">O Estado é Obrigatório</small>
-                        <small *ngIf="cep.hasError('minlength')" class="text-danger">Digite um Estado: SP, RJ
+                        <small *ngIf="state.hasError('required')" class="text-danger">O Estado é Obrigatório</small>
+                        <small *ngIf="state.hasError('maxlength')" class="text-danger">Digite um Estado: SP, RJ
                             etc..</small>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
             <input class="form-control" type="text" id="search" formControlName="search" name="search">
 
             <div class="btn-group-vertical" style="display: flex; align-items: stretch;">
-                <button type="button" class="btn btn-warning" (click)="pesquisar()">Pesquisar</button>
+                <button type="button" class="btn btn-warning" (click)="pesquisar(search)">Pesquisar</button>
             </div>
         </form>
 

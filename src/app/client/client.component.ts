@@ -16,7 +16,6 @@ export class ClientComponent {
   formGroupClient: FormGroup;
   isEditing: Boolean = false;
   submited: Boolean = false;
-  search: string = '';
 
 
   ngOnInit(): void {
@@ -38,8 +37,8 @@ export class ClientComponent {
       phone: ['', [Validators.required,]],
       address: ['', [Validators.required, Validators.minLength(5)]],
       city: ['', [Validators.required, Validators.minLength(2)]],
-      cep: ['', [Validators.required, Validators.max(8)]],
-      state: ['', [Validators.required, Validators.max(2)]],
+      cep: ['', [Validators.required, Validators.maxLength(8)]],
+      state: ['', [Validators.required, Validators.maxLength(2)]],
       search: [''],
     });
 
@@ -47,22 +46,21 @@ export class ClientComponent {
 
   }
 
-  pesquisar(): void {
-
-    
-
-    this.filteredClients = this.clients.filter(item =>
-      item.name.toLowerCase().includes(this.search.toLowerCase())
+  pesquisar(termo: string): void {
+    console.log('Termo de pesquisa:', termo);
+    this.filteredClients = this.clients.filter((item) =>
+      item.name.includes(termo)
     );
+    console.log('Clientes filtrados:', this.filteredClients);
   }
 
   save() {
 
     this.submited = true;
 
-    if (this.formGroupClient.valid) {
+    console.log(this.formGroupClient.valid);
 
-      console.log("Valido");
+    if (this.formGroupClient.valid) {
 
       if (this.isEditing == false) {
 
@@ -105,6 +103,7 @@ export class ClientComponent {
     this.service.delete(client).subscribe({
       next: () => {
         this.clients = this.clients.filter((c) => c !== client);
+        this.filteredClients = this.clients;
       }
     });
 
@@ -149,6 +148,10 @@ export class ClientComponent {
   }
   get state(): any {
     return this.formGroupClient.get("state");
+  }
+
+  get search(): any {
+    return this.formGroupClient.get("search");
   }
 
 }
