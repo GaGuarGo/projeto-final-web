@@ -1,10 +1,12 @@
 package com.br.projeto_clientes.cliente.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "TBL_CLIENTS")
@@ -14,12 +16,32 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
+    @NotBlank(message = "O nome do Cliente não Pode ser em Branco!")
     private String name;
+
+    @Column(nullable = false)
+    @NotBlank(message = "O email do Cliente não Pode ser em Branco!")
     private String email;
+
+    @Column(nullable = false)
+    @NotBlank(message = "O telefone do Cliente não Pode ser em Branco!")
     private String phone;
+
+    @Column(nullable = false)
+    @NotBlank(message = "O endereço do Cliente não Pode ser em Branco!")
     private String address;
+
+    @Column(nullable = false)
+    @NotBlank(message = "A cidade do Cliente não Pode ser em Branco!")
     private String city;
+
+    @Column(nullable = false)
+    @NotBlank(message = "O cep do Cliente não Pode ser em Branco!")
     private String cep;
+
+    @Column(nullable = false)
+    @NotBlank(message = "O estado do Cliente não Pode ser em Branco!")
     private String state;
 
     public int getId() {
