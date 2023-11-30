@@ -19,12 +19,7 @@ export class ClientComponent {
 
 
   ngOnInit(): void {
-    this.service.getClients().subscribe({
-      next: (clients) => {
-        this.clients = clients
-        this.filteredClients = this.clients;
-      }
-    });
+    this.getClients();
 
   }
 
@@ -46,12 +41,44 @@ export class ClientComponent {
 
   }
 
+  getClients(): void {
+    this.service.getClients().subscribe({
+      next: (clients) => {
+        this.clients = clients
+        this.filteredClients = this.clients;
+      }
+    });
+  }
+
+  limparPesquisa(): void {
+
+    this.filteredClients = [];
+    this.clients = [];
+    this.formGroupClient.setValue({
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      cep: "",
+      state: "",
+      search: "",
+    });
+
+    this.getClients();
+
+  }
+
+  //Erro na função Pesquisar
   pesquisar(termo: string): void {
-    console.log('Termo de pesquisa:', termo);
-    this.filteredClients = this.clients.filter((item) =>
-      item.name.includes(termo)
-    );
-    console.log('Clientes filtrados:', this.filteredClients);
+    if (termo.toString().trim() !== "") {
+      const termoLowerCase = termo.toString().toLowerCase();
+      this.filteredClients = this.clients.filter((item) =>
+        item.name.toString().toLowerCase().includes(termoLowerCase)
+      );
+    } else {
+      this.filteredClients = this.clients;
+    }
   }
 
   save() {
@@ -124,6 +151,7 @@ export class ClientComponent {
       city: client.city,
       cep: client.cep,
       state: client.state,
+      search: "",
     });
   }
 

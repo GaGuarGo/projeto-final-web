@@ -81,11 +81,12 @@
 
             </div>
 
-            <label for="search">Pesquisar Cliente:</label>
-            <input class="form-control" type="text" id="search" formControlName="search" name="search">
+            <label for="search" style="padding-top: 8px;">Pesquisar Cliente:</label>
+            <input placeholder="Digite o nome do Cliente" class="form-control" type="text" id="search" formControlName="search" name="search">
 
             <div class="btn-group-vertical" style="display: flex; align-items: stretch;">
                 <button type="button" class="btn btn-warning" (click)="pesquisar(search)">Pesquisar</button>
+                <button type="button" class="btn btn-info" (click)="limparPesquisa()">Limpar Pesquisa</button>
             </div>
         </form>
 
