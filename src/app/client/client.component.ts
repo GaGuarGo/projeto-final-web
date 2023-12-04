@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from '../client.service';
 import { Client } from '../model/client';
+import { PesquisaPipe } from '../pipes/pesquisa.pipe';
 
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  styleUrls: ['./client.component.css'],
+  providers: [PesquisaPipe]
 })
 export class ClientComponent {
 
@@ -16,6 +18,7 @@ export class ClientComponent {
   formGroupClient: FormGroup;
   isEditing: Boolean = false;
   submited: Boolean = false;
+  search: string = "";
 
 
   ngOnInit(): void {
@@ -23,7 +26,7 @@ export class ClientComponent {
 
   }
 
-  constructor(private service: ClientService, private formBuilder: FormBuilder) {
+  constructor(private service: ClientService, private formBuilder: FormBuilder, private pesquisaPipe: PesquisaPipe) {
 
 
     this.formGroupClient = formBuilder.group({
@@ -34,7 +37,7 @@ export class ClientComponent {
       city: ['', [Validators.required, Validators.minLength(2)]],
       cep: ['', [Validators.required, Validators.maxLength(8)]],
       state: ['', [Validators.required, Validators.maxLength(2)]],
-      search: [''],
+
     });
 
     // this.filteredClients = this.clients;
@@ -52,33 +55,30 @@ export class ClientComponent {
 
   limparPesquisa(): void {
 
-    this.filteredClients = [];
+    // this.filteredClients = [];
     this.clients = [];
-    this.formGroupClient.setValue({
-      name: "",
-      email: "",
-      phone: "",
-      address: "",
-      city: "",
-      cep: "",
-      state: "",
-      search: "",
-    });
-
+    this.search = "";
     this.getClients();
 
   }
 
   //Erro na função Pesquisar
-  pesquisar(termo: string): void {
-    if (termo.toString().trim() !== "") {
-      const termoLowerCase = termo.toString().toLowerCase();
-      this.filteredClients = this.clients.filter((item) =>
-        item.name.toString().toLowerCase().includes(termoLowerCase)
-      );
-    } else {
-      this.filteredClients = this.clients;
-    }
+  // pesquisar(termo: string): void {
+  //   if (termo.toString().trim() !== "") {
+  //     const termoLowerCase = termo.toString().toLowerCase();
+  //     this.filteredClients = this.clients.filter((item) =>
+  //       item.name.toString().toLowerCase().includes(termoLowerCase)
+
+  //     );
+  //     console.log("Nome Pesquisado: ", termo);
+  //     console.log("Clientes Filtrados: ", this.filteredClients);
+  //   } else {
+  //     this.filteredClients = this.clients;
+  //   }
+  // }
+
+  pesquisar() {
+    this.clients = this.pesquisaPipe.transform(this.clients, this.search);
   }
 
   save() {
@@ -177,9 +177,4 @@ export class ClientComponent {
   get state(): any {
     return this.formGroupClient.get("state");
   }
-
-  get search(): any {
-    return this.formGroupClient.get("search");
-  }
-
 }

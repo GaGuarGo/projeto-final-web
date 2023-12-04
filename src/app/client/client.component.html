@@ -1,4 +1,4 @@
-<div>
+<div style="background-color: wheat; margin: auto;">
 
     <div class="body">
         <form [formGroup]="formGroupClient">
@@ -78,23 +78,26 @@
             <div class="btn-group-vertical" style="display: flex; align-items: stretch;">
                 <button type="button" class="btn btn-success" (click)="save()">Cadastrar/Editar</button>
 
-
             </div>
 
-            <label for="search" style="padding-top: 8px;">Pesquisar Cliente:</label>
-            <input placeholder="Digite o nome do Cliente" class="form-control" type="text" id="search" formControlName="search" name="search">
+        </form>
 
+        <div class="my-2 card" style="padding: 8px;">
+            <label for="search">Pesquisar Cliente:</label>
+            <input placeholder="Digite o nome do Cliente" class="form-control" type="text" id="search" [(ngModel)]="search"
+                name="search">
             <div class="btn-group-vertical" style="display: flex; align-items: stretch;">
-                <button type="button" class="btn btn-warning" (click)="pesquisar(search)">Pesquisar</button>
+                <button type="button" class="btn btn-warning" (click)="pesquisar()">Pesquisar</button>
                 <button type="button" class="btn btn-info" (click)="limparPesquisa()">Limpar Pesquisa</button>
             </div>
-        </form>
+        </div>
+
 
     </div>
 
     <div class="list-grid">
         <ul>
-            <div *ngFor="let client of filteredClients">
+            <div *ngFor="let client of clients">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{client.name}}</h5>

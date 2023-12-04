@@ -11,6 +11,8 @@ import { MascaraTelefoneDirective } from './client/mascara-telefone.directive';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { PesquisaPipe } from './pipes/pesquisa.pipe';
+
 
 registerLocaleData(localePt);
 
@@ -19,8 +21,8 @@ registerLocaleData(localePt);
   declarations: [
     AppComponent,
     ClientComponent,
-    MascaraTelefoneDirective
-
+    MascaraTelefoneDirective,
+    PesquisaPipe
   ],
   imports: [
     BrowserModule,

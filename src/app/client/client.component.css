@@ -2,10 +2,12 @@
     font-family: Arial, sans-serif;
     background-color: wheat;
     padding: 4px;
-    margin: 0;
+    margin: auto;
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     justify-content: center;
+    width: 500px;
 }
 
 
