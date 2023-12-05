@@ -15,7 +15,7 @@ export class MascaraTelefoneDirective {
 
   aplicarMascara(valor: string): string {
     valor = valor.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-    if (valor.length <= 10) {
+    if (valor.length <= 11) {
       return this.formatarTelefone(valor);
     } else {
       return valor.substring(0, 11); // Limita o tamanho máximo a 10 dígitos

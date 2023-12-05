@@ -21,7 +21,7 @@
             </div>
 
             <label for="telefone">Telefone:</label>
-            <input class="form-control" type="tel" id="phone" formControlName="phone" name="phone">
+            <input class="form-control" type="tel" id="phone" formControlName="phone" name="phone" appMascaraTelefone>
 
             <div *ngIf="submited">
                 <small *ngIf="phone.hasError('required')" class="text-danger">O Telefone é Obrigatório</small>
@@ -52,11 +52,11 @@
             <div class="div-row">
                 <div>
                     <label for="endereco">CEP:</label>
-                    <input class="form-control" type="text" id="cep" formControlName="cep" name="cep" mask="000000-000">
+                    <input class="form-control" type="text" id="cep" formControlName="cep" name="cep" cepMask>
                     <div *ngIf="submited">
                         <small *ngIf="cep.hasError('required')" class="text-danger">O CEP é Obrigatório</small>
                         <small *ngIf="cep.hasError('maxlength')" class="text-danger">Digite um CEP Válido:
-                            12376512</small>
+                            12376-512</small>
                     </div>
                 </div>
 
@@ -84,8 +84,8 @@
 
         <div class="my-2 card" style="padding: 8px;">
             <label for="search">Pesquisar Cliente:</label>
-            <input placeholder="Digite o nome do Cliente" class="form-control" type="text" id="search" [(ngModel)]="search"
-                name="search">
+            <input placeholder="Digite o nome do Cliente" class="form-control" type="text" id="search"
+                [(ngModel)]="search" name="search">
             <div class="btn-group-vertical" style="display: flex; align-items: stretch;">
                 <button type="button" class="btn btn-warning" (click)="pesquisar()">Pesquisar</button>
                 <button type="button" class="btn btn-info" (click)="limparPesquisa()">Limpar Pesquisa</button>
@@ -98,6 +98,7 @@
     <div class="list-grid">
         <ul>
             <div *ngFor="let client of clients">
+
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{client.name}}</h5>

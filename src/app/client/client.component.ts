@@ -35,12 +35,12 @@ export class ClientComponent {
       phone: ['', [Validators.required,]],
       address: ['', [Validators.required, Validators.minLength(5)]],
       city: ['', [Validators.required, Validators.minLength(2)]],
-      cep: ['', [Validators.required, Validators.maxLength(8)]],
+      cep: ['', [Validators.required, Validators.maxLength(9)]],
       state: ['', [Validators.required, Validators.maxLength(2)]],
 
     });
 
-    // this.filteredClients = this.clients;
+    
 
   }
 
@@ -62,20 +62,6 @@ export class ClientComponent {
 
   }
 
-  //Erro na função Pesquisar
-  // pesquisar(termo: string): void {
-  //   if (termo.toString().trim() !== "") {
-  //     const termoLowerCase = termo.toString().toLowerCase();
-  //     this.filteredClients = this.clients.filter((item) =>
-  //       item.name.toString().toLowerCase().includes(termoLowerCase)
-
-  //     );
-  //     console.log("Nome Pesquisado: ", termo);
-  //     console.log("Clientes Filtrados: ", this.filteredClients);
-  //   } else {
-  //     this.filteredClients = this.clients;
-  //   }
-  // }
 
   pesquisar() {
     this.clients = this.pesquisaPipe.transform(this.clients, this.search);

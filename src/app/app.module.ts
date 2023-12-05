@@ -7,11 +7,12 @@ import { ClientComponent } from './client/client.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MascaraTelefoneDirective } from './client/mascara-telefone.directive';
+import { MascaraTelefoneDirective } from './masks/mascara-telefone.directive';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { PesquisaPipe } from './pipes/pesquisa.pipe';
+import { CepMaskDirective } from './masks/mascara-cep.directive';
 
 
 registerLocaleData(localePt);
@@ -22,7 +23,9 @@ registerLocaleData(localePt);
     AppComponent,
     ClientComponent,
     MascaraTelefoneDirective,
-    PesquisaPipe
+    CepMaskDirective,
+    PesquisaPipe,
+
   ],
   imports: [
     BrowserModule,
